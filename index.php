@@ -1,4 +1,5 @@
 <?php include "header.php"; ?>
+<?php session_start(); ?>
     <body class="text-white bg-color">
 
         <!-- Navbar -->
@@ -48,22 +49,29 @@
                 <!-- right -->
                 <div class="col-md-4 p-5">
                     <div class="container tile-color p-4">
-                        <!-- login form -->
-                        <?php
-                            if(isset($_GET["source"])){
-                                $source = $_GET["source"];
 
-                                switch($source){
-                                    case "register":
-                                        include "includes/register.php";
-                                        break;
-                                    case "forgotPass":
-                                        include "includes/forgot_password.php";
-                                        break;
-                                }
+                        <?php
+                            if(isset($_SESSION["username"])){
+                                include "includes/profile.php";
+
                             }else{
-                                include "includes/login.php";
+
+                                if(isset($_GET["source"])){
+                                    $source = $_GET["source"];
+    
+                                    switch($source){
+                                        case "register":
+                                            include "includes/register.php";
+                                            break;
+                                        case "forgotPass":
+                                            include "includes/forgot_password.php";
+                                            break;
+                                    }
+                                }else{
+                                    include "includes/login.php";
+                                }
                             }
+
                         ?>
                     </div>
                     <div class="container p-4 mt-3 tile-color">
