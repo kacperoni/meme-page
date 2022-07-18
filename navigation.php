@@ -15,9 +15,17 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Fun</a></li>
-                        <li><a class="dropdown-item" href="#">Animals</a></li>
+                        <?php
+                            $query = "SELECT * FROM categories";
+                            $allCategoriesQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+
+                            while($row = mysqli_fetch_assoc($allCategoriesQuery)){
+                                $catId = $row["cat_id"];
+                                $catTitle = $row["cat_title"];
+                                echo "<li><a class='dropdown-item' href='#'>$catTitle</a></li>";
+                            }
+
+                        ?>
                     </ul>
                 </li>
             </ul>
