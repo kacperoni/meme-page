@@ -19,13 +19,7 @@
                             </div>
                         </div>
                         <?php
-                            if(isset($_GET['category'])){
-                                $category = $_GET['category'];
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published' AND post_category_id = $category";
-                            }else{
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published'";
-                            }
-        
+                            $query = "SELECT * FROM posts WHERE post_status = 'Draft'";
                             $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
 
                             if(mysqli_num_rows($allPostsQuery)<=0){

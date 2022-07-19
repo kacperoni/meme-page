@@ -13,7 +13,18 @@
         </div>
         <div class="row">
             <ul class="mt-2" style="list-style-type:none;">
-                <li class="bi bi-image"> 0/0</li>
+                <?php
+                $userId = $_SESSION['user_id'];
+                    $query = "SELECT * FROM posts WHERE post_author_id = $userId";
+                    $allUserPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                    $numOfPosts = mysqli_num_rows($allUserPostsQuery);
+
+                    $query = "SELECT * FROM posts WHERE post_author_id = $userId AND post_status = 'Published'";
+                    $allUserPublishedPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                    $numOfPublishedPosts = mysqli_num_rows($allUserPublishedPostsQuery);
+
+                ?>
+                <li class="bi bi-image"> <?php echo $numOfPublishedPosts."/".$numOfPosts; ?></li>
                 <li class="bi bi-chat-right-text"> 0</li>
             </ul>
         </div>

@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Pending</a>
+                    <a href="pending.php" class="nav-link">Pending</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Random</a>
@@ -22,7 +22,7 @@
                             while($row = mysqli_fetch_assoc($allCategoriesQuery)){
                                 $catId = $row["cat_id"];
                                 $catTitle = $row["cat_title"];
-                                echo "<li><a class='dropdown-item' href='#'>$catTitle</a></li>";
+                                echo "<li><a class='dropdown-item' href='index.php?category=$catId'>$catTitle</a></li>";
                             }
 
                         ?>
