@@ -13,3 +13,7 @@ a{
 ul{
     list-style-type: none;
 }
+
+#menu:hover{
+    color:green;
+}

@@ -27,11 +27,13 @@
                 $selectUserQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                 while($row = mysqli_fetch_assoc($selectUserQuery)){
                     $userId = $row["user_id"];
+                    $userRole = $row["user_role"];
                 }
                 
                 session_start();
                 $_SESSION["username"]=$username;
                 $_SESSION["user_id"]= $userId;
+                $_SESSION["user_role"] = $userRole;
                 
 
                 header("Location: index.php");

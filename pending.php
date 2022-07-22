@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <?php
-                            $query = "SELECT * FROM posts WHERE post_status = 'Draft'";
+                            $query = "SELECT * FROM posts WHERE post_status = 'Draft' ORDER BY post_date DESC";
                             $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
 
                             if(mysqli_num_rows($allPostsQuery)<=0){
@@ -27,6 +27,7 @@
                             }
                             else{
                             while($row=mysqli_fetch_assoc($allPostsQuery)){
+                                $postId = $row["post_id"];
                                 $postTitle = $row["post_title"];
                                 $postDate = $row["post_date"];
                                 $postImage = $row["post_image"];
@@ -57,6 +58,24 @@
                                 <?php echo "<a class='text-secondary text-decoration-none'>$postDate</a>";?>
                                 <?php echo "<a class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
                             <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme">
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <button class="btn btn-danger">+</button>
+                                    <strong class="mx-3">1</strong>
+                                    <button class="btn btn-warning">&#9733;</button>
+                                </div>
+                                <?php
+                                    if(isset($_SESSION["user_role"]) && $_SESSION["user_role"]=="Admin"){
+                                ?>
+                                    
+                                <div class="col-6 text-end">
+                                    <a href="pending.php?accept=<?php echo $postId; ?>"><button class="btn btn-success">&#x2713;</button></a>
+                                    <a href="pending.php?delete=<?php echo $postId; ?>"><button class="btn btn-danger">&#10005;</button></a>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                            </div>
                         </div>
                         <?php }} ?>
                     </div>
@@ -98,3 +117,21 @@
         </div>
 <!-- footer -->
 <?php include "footer.php"; ?>
+
+<?php
+    if(isset($_GET["accept"])){
+        $postId = $_GET["accept"];
+        
+        $query = "UPDATE posts SET post_status = 'Published' WHERE post_id = $postId";
+        $acceptPostQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+        header("Location: pending.php");
+    }
+
+    if(isset($_GET["delete"])){
+        $postId = $_GET["delete"];
+
+        $query = "DELETE FROM posts WHERE post_id = $postId";
+        $deletePostQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+        header("Location: pending.php");
+    }
+?>

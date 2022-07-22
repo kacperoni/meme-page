@@ -32,11 +32,7 @@
 </div>
 
 <div class="row mt-2">
-    <div class="col-6 bg-dark text-center">
-        My profile
-    </div>
-    <div class="col-6 bg-dark text-center">
-        Settings
-    </div>
-    
+    <a href="#" id="menu" class='col-4 bg-dark text-center'>My profile</a>
+    <a href="#" class='col-4 bg-dark text-center'>Settings</a>
+    <a href="#" class='col-4 bg-dark text-center'>Favorites</a>
 </div>

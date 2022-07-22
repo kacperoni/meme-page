@@ -21,9 +21,11 @@
                         <?php
                             if(isset($_GET['category'])){
                                 $category = $_GET['category'];
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published' AND post_category_id = $category";
+                                $query = "SELECT * FROM posts WHERE post_status = 'Published' AND post_category_id = $category ";
+                                $query .= "ORDER BY post_date DESC";
                             }else{
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published'";
+                                $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+                                $query .= "ORDER BY post_date DESC";
                             }
         
                             $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
@@ -37,11 +39,17 @@
                                 $postDate = $row["post_date"];
                                 $postImage = $row["post_image"];
                                 $postCategoryId = $row["post_category_id"];
+                                $postAuthorId = $row["post_author_id"];
 
                                 $query = "SELECT cat_title FROM categories WHERE cat_id = $postCategoryId";
                                 $categoryNameQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                                 $row = mysqli_fetch_row($categoryNameQuery);
                                 $catTitle = $row[0];
+
+                                $query = "SELECT username FROM users WHERE user_id = $postAuthorId";
+                                $postAuthorQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                                $row = mysqli_fetch_row($postAuthorQuery);
+                                $postAuthor = $row[0];
                         ?>
 
                         <div class="container p-5 pt-2">
@@ -60,9 +68,17 @@
                                 </div>
                             </div>
                             <p class="px-3 py-1 mt-2 mb-0 tile-color">
+                                <?php echo "<a class='text-danger text-decoration-none'>$postAuthor</a>" ?>
                                 <?php echo "<a class='text-secondary text-decoration-none'>$postDate</a>";?>
                                 <?php echo "<a class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
                             <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme">
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <button class="btn btn-danger">+</button>
+                                    <strong class="mx-3">1</strong>
+                                    <button class="btn btn-warning">&#9733;</button>
+                                </div>
+                            </div>
                         </div>
                         <?php }} ?>
                     </div>
@@ -101,6 +117,29 @@
                     </div>
                 </div>
             </div>
+            <div class="justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
+
+
+
+        
 <!-- footer -->
 <?php include "footer.php"; ?>
