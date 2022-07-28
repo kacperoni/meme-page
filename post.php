@@ -11,48 +11,21 @@
                 <div class="col-md-8">
                     <div class="container">
                         <div class="container px-5 pt-5">
-                            <div class="row m-0 p-0">
-                        
-                                <?php if(isset($_SESSION["username"])){ ?>
-                                        <a href="add_post.php"><button class="btn btn-danger">+ Add post</button></a>
-                                    <?php }?>
-                            </div>
                         </div>
                         <?php
-                            $query = "SELECT * FROM posts WHERE post_status='Published'";
-                            $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
-                            $numOfPosts = mysqli_num_rows($allPostsQuery);
-                            $postsPerPage = 3;
-                            $numOfPages = ceil($numOfPosts/$postsPerPage);
-                            $postStart = 0;
-
-                            if(isset($_GET["page"])){
-                                $pageNum = $_GET["page"];
-                                $postStart = ($pageNum*$postsPerPage)-$postsPerPage;
-                            }
-
-                            if(isset($_GET['category'])){
-                                $category = $_GET['category'];
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published' AND post_category_id = $category ";
-                                $query .= "ORDER BY post_date DESC";
-                            }else{
-                                $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
-                                $query .= "ORDER BY post_date DESC LIMIT $postStart, $postsPerPage";
+                            if(isset($_GET["post_id"])){
+                                $postId = $_GET["post_id"];
+                                $query = "SELECT * FROM posts WHERE post_id = $postId";
                             }
         
-                            $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                            $postQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
 
-                            if(mysqli_num_rows($allPostsQuery)<=0){
-                                echo "<h1>No posts</h1>";
-                            }
-                            else{
-                            while($row=mysqli_fetch_assoc($allPostsQuery)){
+                            while($row=mysqli_fetch_assoc($postQuery)){
                                 $postTitle = $row["post_title"];
                                 $postDate = $row["post_date"];
                                 $postImage = $row["post_image"];
                                 $postCategoryId = $row["post_category_id"];
                                 $postAuthorId = $row["post_author_id"];
-                                $postId = $row["post_id"];
 
                                 $query = "SELECT cat_title FROM categories WHERE cat_id = $postCategoryId";
                                 $categoryNameQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
@@ -71,9 +44,7 @@
                                 <div class="col">
                                     <div>
                                         <img class="mx-0"src="profile.png" width="50" alt="profile-pic">
-                                        <span class="overlay-text fs-4">
-                                            <a href="post.php?post_id=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
-                                        </span>
+                                        <span class="overlay-text fs-4"> <?php echo $postTitle; ?></span>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -85,8 +56,8 @@
                             <p class="px-3 py-1 mt-2 mb-0 tile-color">
                                 <?php echo "<a class='text-danger text-decoration-none'>$postAuthor</a>" ?>
                                 <?php echo "<a class='text-secondary text-decoration-none'>$postDate</a>";?>
-                                <?php echo "<a href='index.php?category=$postCategoryId'class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
-                            <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme" class="tile-color">
+                                <?php echo "<a class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
+                            <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme">
                             <div class="row mt-2">
                                 <div class="col-6">
                                     <button class="btn btn-danger">+</button>
@@ -94,8 +65,30 @@
                                     <button class="btn btn-warning">&#9733;</button>
                                 </div>
                             </div>
+                            <?php } ?>
+                        <a href="index.php"><button class="btn btn-danger mt-5 w-100" style="font-size: 1.5em;">Back to homepage</button></a>
+                            
+                            <!-- leave comment section -->
+                            <div class="row mt-5 tile-color">
+                                <div class="card-footer py-3 border-0">
+                                    <div class="d-flex flex-start w-100">
+                                        <img class="me-3" src="profile.png" alt="avatar" width="40" height="40"/>
+                                        <div class="form-outline w-100">
+                                            <form action="" method="POST">
+                                                <textarea class="form-control bg-dark border-dark text-secondary" rows="2">Leave a comment</textarea>
+                                    </div>
+                                                <input type="submit" class="btn btn-secondary h-50 mx-2" value="&#10148;">
+                                            </form>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <!-- all comments sections -->
+                            
+
                         </div>
-                        <?php }} ?>
+                        
+                        
                     </div>
                 </div>
 
@@ -132,21 +125,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container-fluid w-50 my-container">
-                <nav class="navbar navbar-dark p-2 navbar-expand-lg tile-color">
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <?php
-                            for($i=1; $i<=$numOfPages; $i++){
-                                echo "<a class='nav-item nav-link active' href='index.php?page=$i'>$i</a>";
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </nav>
-            </div>
         </div>
+
+
 
         
 <!-- footer -->

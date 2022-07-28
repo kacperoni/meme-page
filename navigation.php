@@ -1,3 +1,18 @@
+<?php
+    $query = "SELECT post_id FROM posts WHERE post_status = 'Published'";
+    $allPostIdQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+    $allIds = array();
+
+    while($row = mysqli_fetch_assoc($allPostIdQuery)){
+        $allIds[]=$row['post_id'];
+    }
+
+    $countOfPosts = count($allIds);
+    $randIndex = rand(0,$countOfPosts-1);
+
+    $randomPostId = $allIds[$randIndex];
+?>
+
 <nav class="navbar navbar-dark p-2 navbar-expand-lg tile-color">
 <div class="container">
     <a class="bi bi-tsunami navbar-brand" href="index.php"> Memes</a>
@@ -8,7 +23,7 @@
                     <a href="pending.php" class="nav-link">Pending</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Random</a>
+                    <a href="post.php?post_id=<?php echo $randomPostId; ?>" class="nav-link">Random</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
