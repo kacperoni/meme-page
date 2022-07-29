@@ -22,9 +22,10 @@
                             $query = "SELECT * FROM posts WHERE post_status='Published'";
                             $allPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                             $numOfPosts = mysqli_num_rows($allPostsQuery);
-                            $postsPerPage = 3;
+                            $postsPerPage = 2;
                             $numOfPages = ceil($numOfPosts/$postsPerPage);
                             $postStart = 0;
+                            $pageNum=1;
 
                             if(isset($_GET["page"])){
                                 $pageNum = $_GET["page"];
@@ -132,20 +133,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container-fluid w-50 my-container">
-                <nav class="navbar navbar-dark p-2 navbar-expand-lg tile-color">
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <?php
-                            for($i=1; $i<=$numOfPages; $i++){
-                                echo "<a class='nav-item nav-link active' href='index.php?page=$i'>$i</a>";
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+            
+            <!-- pagination -->
+            <?php include "includes/pagination.php"; ?>
         </div>
 
         
