@@ -28,12 +28,14 @@
                 while($row = mysqli_fetch_assoc($selectUserQuery)){
                     $userId = $row["user_id"];
                     $userRole = $row["user_role"];
+                    $userEmail = $row["user_email"];
                 }
                 
                 session_start();
                 $_SESSION["username"]=$username;
                 $_SESSION["user_id"]= $userId;
                 $_SESSION["user_role"] = $userRole;
+                $_SESSION["user_email"] = $userEmail;
                 
 
                 header("Location: index.php");

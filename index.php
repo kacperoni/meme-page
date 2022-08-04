@@ -90,8 +90,8 @@
                             <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme" class="tile-color">
                             <div class="row mt-2">
                                 <div class="col-6">
-                                    <button class="btn btn-danger">+</button>
-                                    <strong class="mx-3">1</strong>
+                                    <button class="btn btn-danger like" title="<?php echo $postId; ?>">+</button>
+                                    <strong class="mx-3">7</strong>
                                     <button class="btn btn-warning">&#9733;</button>
                                 </div>
                             </div>
@@ -99,6 +99,7 @@
                         <?php }} ?>
                     </div>
                 </div>
+                <script type="text/javascript" src="js/likes.js"></script>
 
                 <!-- right -->
                 <div class="col-md-4 p-5">

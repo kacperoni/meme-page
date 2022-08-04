@@ -70,21 +70,74 @@
                             
                             <!-- leave comment section -->
                             <div class="row mt-5 tile-color">
-                                <div class="card-footer py-3 border-0">
+                                <div class="card-footer py-3">
                                     <div class="d-flex flex-start w-100">
                                         <img class="me-3" src="profile.png" alt="avatar" width="40" height="40"/>
                                         <div class="form-outline w-100">
                                             <form action="" method="POST">
-                                                <textarea class="form-control bg-dark border-dark text-secondary" rows="2">Leave a comment</textarea>
+                                                <textarea name="comment_content" class="form-control bg-dark border-dark text-secondary" rows="2" placeholder="Leave a comment"></textarea>
                                     </div>
-                                                <input type="submit" class="btn btn-secondary h-50 mx-2" value="&#10148;">
+                                                <input type="submit" name="leave_comment" class="btn btn-secondary h-50 mx-2" value="&#10148;">
                                             </form>
                                         </div>
                                 </div>
+                                <!-- all comments -->
+                                <?php
+                                    $query = "SELECT * FROM comments WHERE comment_post_id = $postId";
+                                    $allCommentsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+
+                                    while($row = mysqli_fetch_assoc($allCommentsQuery)){
+                                        $commentAuthor = $row["comment_author"];
+                                        $commentDate = $row["comment_date"];
+                                        $commentContent = $row["comment_content"];
+                                ?>
+
+                                <div class="d-flex flex-row comment-row py-3 px-2">
+                                    <div class="p-2">
+                                        <img src="profile.png" alt="user_profile" width="40">
+                                    </div>
+                                    <div class="w-100">
+                                        <h6 class="text-danger"><?php echo $commentAuthor;?>  <small class="text-secondary"><?php echo $commentDate; ?></small></h6>
+                                        <span class="m-b-15 d-block"><?php echo $commentContent; ?></span>
+                                        <div class="comment-footer mt-1">
+                                            <?php
+                                                if(isset($_SESSION["user_role"])){
+                                                    if($_SESSION["user_role"]=="Admin"){
+                                                        echo "<button type='button' class='btn btn-warning btn-sm'>Edit</button> ";
+                                                        echo "<button type='button' class='btn btn-success btn-sm'>Publish</button> ";
+                                                        echo "<button type='button' class='btn btn-danger btn-sm'>Delete</button> ";
+                                                    }
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <?php
+                                    }
+                                ?>
+                
                             </div>
-                            
-                            <!-- all comments sections -->
-                            
+
+                            <!-- add comment php -->
+                            <?php
+                                if(isset($_POST["leave_comment"])){
+                                    if(isset($_SESSION["username"])){
+                                        $commentAuthor = $_SESSION["username"];
+                                        $commentPostId = $postId;
+                                        $commentEmail = $_SESSION["user_email"];
+                                        $commentContent = mysqli_real_escape_string($connection,$_POST["comment_content"]);
+                                        
+                                        $query = "INSERT INTO comments(comment_author, comment_post_id, comment_email, comment_date, comment_content) ";
+                                        $query .= "VALUES('$commentAuthor', $commentPostId, '$commentEmail', now(), '$commentContent')";
+
+                                        $addCommentQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+
+                                        header("Location: post.php?post_id=$postId");
+                                    }else{
+                                        echo "<p>You must be logged in to comment!</p>";
+                                    }
+                                }
+                            ?>
 
                         </div>
                         
