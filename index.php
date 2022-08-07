@@ -79,7 +79,13 @@
                                 </div>
                                 <div class="col">
                                     <a href="#">
-                                        <p class="text-end bi bi-chat-right-text m-2 text-white"> 1</p>
+                                        <!-- number of comments -->
+                                        <?php
+                                            $query = "SELECT * FROM comments WHERE comment_post_id = $postId";
+                                            $allPostCommentsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                                            $numOfComments = mysqli_num_rows($allPostCommentsQuery);
+                                        ?>
+                                        <p class="text-end bi bi-chat-right-text m-2 text-white"> <?php echo $numOfComments; ?></p>
                                     </a>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@
         <div class="row">
             <ul class="mt-2" style="list-style-type:none;">
                 <?php
-                $userId = $_SESSION['user_id'];
+                    $userId = $_SESSION['user_id'];
                     $query = "SELECT * FROM posts WHERE post_author_id = $userId";
                     $allUserPostsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                     $numOfPosts = mysqli_num_rows($allUserPostsQuery);
@@ -25,14 +25,21 @@
 
                 ?>
                 <li class="bi bi-image"> <?php echo $numOfPublishedPosts."/".$numOfPosts; ?></li>
-                <li class="bi bi-chat-right-text"> 0</li>
+                <!-- number of user's comments -->
+                <?php
+                    $username = $_SESSION["username"];
+                    $query = "SELECT * FROM comments WHERE comment_author = '$username'";
+                    $allUsersCommentsQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                    $numOfUserComments = mysqli_num_rows($allUsersCommentsQuery);
+                ?>
+                <li class="bi bi-chat-right-text"> <?php echo $numOfUserComments; ?></li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="row mt-2">
-    <a href="#" id="menu" class='col-4 bg-dark text-center'>My profile</a>
+    <a href="user_page.php" id="menu" class='col-4 bg-dark text-center'>My profile</a>
     <a href="#" class='col-4 bg-dark text-center'>Settings</a>
     <a href="#" class='col-4 bg-dark text-center'>Favorites</a>
 </div>
