@@ -14,21 +14,24 @@
         $username = mysqli_real_escape_string($connection, $_POST["username"]);
         $password = mysqli_real_escape_string($connection, $_POST["password"]);
 
-        $query = "SELECT user_password FROM users WHERE username = '$username'";
+        $query = "SELECT user_password,username FROM users WHERE username = '$username'";
         $selectUserPasswordQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
         $row = mysqli_fetch_row($selectUserPasswordQuery);
-        if(empty($row)) echo "Username doesn't exist!";
-        else{
-            $userPassword = $row[0];
-            $password = crypt($password, $userPassword);
-            if(!hash_equals($userPassword, $password)) echo "Invalid password, try again!";
-            else{
+        $userPassword = $row[0];
+        $userUsername = $row[1];
+        // if(empty($row)) echo "Username doesn't exist!";
+        // else{
+            // $userPassword = $row[0];
+            // $password = crypt($password, $userPassword);
+            // if(!hash_equals($userPassword, $password)) echo "Invalid password, try again!";
+            if($username === $userUsername and password_verify($password,$userPassword) ){
                 $query = "SELECT * from users WHERE username = '$username'";
                 $selectUserQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                 while($row = mysqli_fetch_assoc($selectUserQuery)){
                     $userId = $row["user_id"];
                     $userRole = $row["user_role"];
                     $userEmail = $row["user_email"];
+                    $userProfilePic = $row["user_image"];
                 }
                 
                 session_start();
@@ -36,11 +39,18 @@
                 $_SESSION["user_id"]= $userId;
                 $_SESSION["user_role"] = $userRole;
                 $_SESSION["user_email"] = $userEmail;
+                if(empty($userProfilePic) or $userProfilePic === NULL){
+                    $_SESSION["user_profile_pic"] = "profile.png";
+                }else{
+                    $_SESSION["user_profile_pic"] = $userProfilePic;
+                }
                 
 
                 header("Location: index.php");
+            }else{
+                echo "Invalid username or password, try again!";
             }
-        }
+        // }
     }
 ?>
 <div class="row">

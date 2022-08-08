@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <?php include "navigation.php"; ?>
 
-        <div class="container">
+        <div class="container pt-5">
             <div class="row">
                 <!-- left -->
                 <div class="col-md-8">
@@ -32,10 +32,14 @@
                                 $row = mysqli_fetch_row($categoryNameQuery);
                                 $catTitle = $row[0];
 
-                                $query = "SELECT username FROM users WHERE user_id = $postAuthorId";
+                                $query = "SELECT username,user_image FROM users WHERE user_id = $postAuthorId";
                                 $postAuthorQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
                                 $row = mysqli_fetch_row($postAuthorQuery);
                                 $postAuthor = $row[0];
+                                $postAuthorPic = $row[1];
+                                if(empty($postAuthorPic) or $postAuthorPic === NULL){
+                                    $postAuthorPic = "profile.png";
+                                }
                         ?>
 
                         <div class="container p-5 pt-2">
@@ -43,7 +47,7 @@
                             <div class="row tile-color m-0 p-0">
                                 <div class="col">
                                     <div>
-                                        <img class="mx-0"src="profile.png" width="50" alt="profile-pic">
+                                        <img class="mx-0"src="images/avatars/<?php echo $postAuthorPic;?>" width="50" alt="profile-pic">
                                         <span class="overlay-text fs-4"> <?php echo $postTitle; ?></span>
                                     </div>
                                 </div>
@@ -78,7 +82,7 @@
                             <div class="row mt-5 tile-color">
                                 <div class="card-footer py-3">
                                     <div class="d-flex flex-start w-100">
-                                        <img class="me-3" src="profile.png" alt="avatar" width="40" height="40"/>
+                                        <img class="me-3" src="images/avatars/<?php echo $_SESSION['user_profile_pic'];?>" alt="avatar" width="40" height="40"/>
                                         <div class="form-outline w-100">
                                             <form action="" method="POST">
                                                 <textarea name="comment_content" class="form-control bg-dark border-dark text-secondary" rows="2" placeholder="Leave a comment"></textarea>
@@ -96,11 +100,19 @@
                                         $commentAuthor = $row["comment_author"];
                                         $commentDate = $row["comment_date"];
                                         $commentContent = $row["comment_content"];
+
+                                        $query = "SELECT user_image FROM users WHERE username = '$commentAuthor'";
+                                        $selectCommentAuthorPic = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                                        $row = mysqli_fetch_row($selectCommentAuthorPic);
+                                        $commentAuthorPic = $row[0];
+                                        if(empty($commentAuthorPic) or $commentAuthorPic === NULL){
+                                            $commentAuthorPic = "profile.png";
+                                        }
                                 ?>
 
                                 <div class="d-flex flex-row comment-row py-3 px-2">
                                     <div class="p-2">
-                                        <img src="profile.png" alt="user_profile" width="40">
+                                        <img src="images/avatars/<?php echo $commentAuthorPic;?>" alt="user_profile" width="40">
                                     </div>
                                     <div class="w-100">
                                         <h6 class="text-danger"><?php echo $commentAuthor;?>  <small class="text-secondary"><?php echo $commentDate; ?></small></h6>

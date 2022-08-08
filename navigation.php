@@ -13,12 +13,14 @@
     $randomPostId = $allIds[$randIndex];
 ?>
 
-<nav class="navbar navbar-dark p-2 navbar-expand-lg tile-color">
-<div class="container">
-    <a class="bi bi-tsunami navbar-brand" href="index.php"> Memes</a>
-    <div class="d-flex">
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
+<nav class="navbar navbar-dark p-2 navbar-expand-md tile-color fixed-top justify-content-center">
+    <div class="container-fluid px-5">
+        <a class="bi bi-tsunami navbar-brand px-5 text-danger" href="index.php"> Memes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mx-5">
                 <li class="nav-item">
                     <a href="pending.php" class="nav-link">Pending</a>
                 </li>
@@ -46,5 +48,4 @@
             </ul>
         </div>
     </div>
-</div>
 </nav>

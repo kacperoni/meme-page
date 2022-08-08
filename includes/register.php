@@ -30,15 +30,17 @@
             echo "Password doesn't match!";
         }
         else{
-            $query = "SELECT user_randSalt FROM users";
-            $selectRandsaltQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
-            $row = mysqli_fetch_assoc($selectRandsaltQuery);
-            $randSalt = $row['user_randSalt'];
+            // $query = "SELECT user_randSalt FROM users";
+            // $selectRandsaltQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+            // $row = mysqli_fetch_assoc($selectRandsaltQuery);
+            // $randSalt = $row['user_randSalt'];
 
-            $password = crypt($password1,$randSalt);
+            // $password = crypt($password1,$randSalt);
 
-            $query = "INSERT INTO users (username, user_email, user_password)";
-            $query .= "VALUES ('$username', '$email', '$password')";
+            $password = password_hash($password1,PASSWORD_BCRYPT,array('cost'=>12));
+
+            $query = "INSERT INTO users (username, user_email, user_password, user_create_date)";
+            $query .= "VALUES ('$username', '$email', '$password', now())";
 
             $insertUserQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
 

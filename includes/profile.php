@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-5 p-0">
-        <img class="img-fluid" src="profile.png" width="100" alt="profile_pic">
+        <?php $userProfilePic = $_SESSION["user_profile_pic"]; ?>
+        <img class="img-fluid" src="images/avatars/<?php echo $userProfilePic;?>" width="100" alt="profile_pic">
     </div>
     <div class="col-7">
         <div class="row bg-dark">
@@ -40,6 +41,6 @@
 
 <div class="row mt-2">
     <a href="user_page.php" id="menu" class='col-4 bg-dark text-center'>My profile</a>
-    <a href="#" class='col-4 bg-dark text-center'>Settings</a>
+    <a href="settings.php" class='col-4 bg-dark text-center'>Settings</a>
     <a href="#" class='col-4 bg-dark text-center'>Favorites</a>
 </div>

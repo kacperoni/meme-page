@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <?php include "navigation.php"; ?>
 
-        <div class="container">
+        <div class="container pt-5">
             <div class="row">
                 <!-- left -->
                 <div class="col-md-8">
@@ -32,11 +32,16 @@
                                 $postDate = $row["post_date"];
                                 $postImage = $row["post_image"];
                                 $postCategoryId = $row["post_category_id"];
+                                $postAuthorId = $row["post_author_id"];
 
-                                $query = "SELECT cat_title FROM categories WHERE cat_id = $postCategoryId";
-                                $categoryNameQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
-                                $row = mysqli_fetch_row($categoryNameQuery);
-                                $catTitle = $row[0];
+                                $query = "SELECT username,user_image FROM users WHERE user_id = $postAuthorId";
+                                $postAuthorQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
+                                $row = mysqli_fetch_row($postAuthorQuery);
+                                $postAuthor = $row[0];
+                                $postAuthorPic = $row[1];
+                                if(empty($postAuthorPic) or $postAuthorPic === NULL){
+                                    $postAuthorPic = "profile.png";
+                                }
                         ?>
 
                         <div class="container p-5 pt-2">
@@ -44,7 +49,7 @@
                             <div class="row tile-color m-0 p-0">
                                 <div class="col">
                                     <div>
-                                        <img class="mx-0"src="profile.png" width="50" alt="profile-pic">
+                                        <img class="mx-0"src="images/avatars/<?php echo $postAuthorPic; ?>" width="50" alt="profile-pic">
                                         <span class="overlay-text fs-4"> <?php echo $postTitle; ?></span>
                                     </div>
                                 </div>

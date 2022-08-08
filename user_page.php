@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <?php include "navigation.php"; ?>
 
-        <div class="container">
+        <div class="container pt-5">
             <div class="row">
                 <!-- left -->
                 <div class="col-md-8">
@@ -13,7 +13,7 @@
                         <div class="container px-5 pt-5">
                             <div class="row">
                                 <div class="col-4 m-0 p-0">
-                                    <img class="rounded-circle img-fluid"src="profile.png" alt="profile_pic" width="200">
+                                    <img class="rounded-circle img-fluid"src="images/avatars/<?php echo $_SESSION["user_profile_pic"]; ?>" alt="profile_pic" width="200">
                                 </div>
                                 <div class="col-8">
                                     <div class="row">
