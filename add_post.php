@@ -1,5 +1,8 @@
 <?php include "header.php"; ?>
 <?php session_start(); ?>
+<?php
+    if(!isset($_SESSION["username"])) header("Location: index.php");
+?>
     <body class="text-white bg-color">
 
         <!-- Navbar -->
@@ -70,6 +73,7 @@
                                             }else{
                                                 echo "<div class='text-danger text-center'>Fill up the fields!</div>";
                                             }
+                                            header("Location: pending.php");
                                             
                                         } 
                                     ?>

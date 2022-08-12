@@ -1,3 +1,6 @@
+<?php
+    if(!isset($_SESSION["username"])) header("Location: index.php");
+?>
 <div class="row">
     <div class="col-5 p-0">
         <?php $userProfilePic = $_SESSION["user_profile_pic"]; ?>

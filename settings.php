@@ -1,5 +1,8 @@
 <?php include "header.php"; ?>
 <?php session_start(); ?>
+<?php
+    if(!isset($_SESSION["username"])) header("Location: index.php");
+?>
     <body class="text-white bg-color">
 
         <!-- Navbar -->
@@ -119,13 +122,13 @@
                                 <h2>Password</h2>
                                 <form action="" method="POST">
                                     <div class="input-group mb-2">
-                                        <input type="text" name="user_password" class="form-control bg-dark border-dark text-secondary" placeholder="Current password">
+                                        <input type="password" name="user_password" class="form-control bg-dark border-dark text-secondary" placeholder="Current password">
                                     </div>
                                     <div class="input-group mb-2">
-                                        <input type="text" name="new_password" class="form-control bg-dark border-dark text-secondary" placeholder="New password">
+                                        <input type="password" name="new_password" class="form-control bg-dark border-dark text-secondary" placeholder="New password">
                                     </div>
                                     <div class="input-group mb-2">
-                                        <input type="text" name="new_password2" class="form-control bg-dark border-dark text-secondary" placeholder="Repeat password">
+                                        <input type="password" name="new_password2" class="form-control bg-dark border-dark text-secondary" placeholder="Repeat password">
                                     </div>
                                     <div class="input-group mb-2">
                                         <input type="submit" name="change_password" class="btn btn-danger w-100" value="Save">

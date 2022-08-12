@@ -30,5 +30,11 @@ ul{
 
 .current-page {
     color: #fff;
-    background: grey;
+    border-bottom: 2px solid red;
+
+}
+
+.own-active{
+    border-bottom: 1px solid red;
+    
 }

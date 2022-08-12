@@ -17,13 +17,10 @@
         $query = "SELECT user_password,username FROM users WHERE username = '$username'";
         $selectUserPasswordQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
         $row = mysqli_fetch_row($selectUserPasswordQuery);
-        $userPassword = $row[0];
-        $userUsername = $row[1];
-        // if(empty($row)) echo "Username doesn't exist!";
-        // else{
-            // $userPassword = $row[0];
-            // $password = crypt($password, $userPassword);
-            // if(!hash_equals($userPassword, $password)) echo "Invalid password, try again!";
+        if(empty($row)) echo "Invalid username or password!";
+        else{
+            $userPassword = $row[0];
+            $userUsername = $row[1];
             if($username === $userUsername and password_verify($password,$userPassword) ){
                 $query = "SELECT * from users WHERE username = '$username'";
                 $selectUserQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
@@ -50,7 +47,7 @@
             }else{
                 echo "Invalid username or password, try again!";
             }
-        // }
+        }
     }
 ?>
 <div class="row">

@@ -4,13 +4,13 @@
 
         <!-- Navbar -->
         <?php include "navigation.php"; ?>
-
         <div class="container pt-5">
             <div class="row">
                 <!-- left -->
                 <div class="col-md-8">
                     <div class="container">
                         <div class="container px-5 pt-5">
+                        <?php include "includes/delete_modal.php"; ?>
                             <div class="row m-0 p-0">
                         
                                 <?php if(isset($_SESSION["username"])){ ?>
@@ -81,7 +81,9 @@
                                     
                                 <div class="col-6 text-end">
                                     <a href="pending.php?accept=<?php echo $postId; ?>"><button class="btn btn-success">&#x2713;</button></a>
-                                    <a href="pending.php?delete=<?php echo $postId; ?>"><button class="btn btn-danger">&#10005;</button></a>
+                                    <!-- <a href="pending.php?delete=<?php echo $postId; ?>"><button class="btn btn-danger">&#10005;</button></a> -->
+                                    <a rel="<?php echo $postId;?>"href="#" class="delete_link"><button class="btn btn-danger">&#10005;</button></a>
+
                                 </div>
                                 <?php
                                     }
@@ -146,3 +148,5 @@
         header("Location: pending.php");
     }
 ?>
+
+<script src="js/delete_post.js"></script>
