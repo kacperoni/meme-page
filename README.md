@@ -9,3 +9,13 @@ Technology stack:
   <li>Bootsrap 5.2 </li>
   <li>MariaDB</li>
 </ul>
+
+Package Manager:
+<ul>
+  <li>Composer 2.4.1</li>
+</ul>
+
+Packages:
+<ul>
+  <li>PHPMailer 6.6</li>
+</ul>
