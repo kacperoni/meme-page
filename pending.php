@@ -33,6 +33,7 @@
                                 $postImage = $row["post_image"];
                                 $postCategoryId = $row["post_category_id"];
                                 $postAuthorId = $row["post_author_id"];
+                                $postContent = $row["post_content"];
 
                                 $query = "SELECT username,user_image FROM users WHERE user_id = $postAuthorId";
                                 $postAuthorQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
@@ -68,6 +69,9 @@
                             <p class="px-3 py-1 mt-2 mb-0 tile-color">
                                 <?php echo "<a class='text-secondary text-decoration-none'>$postDate</a>";?>
                                 <?php echo "<a class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
+                            <?php if(!empty($postContent)): ?>
+                                <p class="px-3 py-1 mt-2 mb-0 tile-color"><?php echo $postContent; ?></p>
+                            <?php endif; ?>
                             <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme">
                             <div class="row mt-2">
                                 <div class="col-6">

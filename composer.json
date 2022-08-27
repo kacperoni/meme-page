@@ -1,0 +1,17 @@
+{
+    "name": "kacperkubacki/meme-page",
+    "require": {
+        "phpmailer/phpmailer": "^6.6"
+    },
+    "autoload": {
+        "classmap": [
+            "classes"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Kacper Kubacki",
+            "email": "kacper.kubacki87@gmail.com"
+        }
+    ]
+}

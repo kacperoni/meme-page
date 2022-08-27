@@ -50,6 +50,9 @@
         }
     }
 ?>
+<?php if(isset($_GET["reset"])): ?>
+<p>Password has been changed! You can login now.</p>
+<?php endif; ?>
 <div class="row">
     <div class="col-md"><a class="text-secondary" href="index.php?source=forgotPass">Forgot password</a></div>
     <div class="col-md text-end"><a class="text-white" href="index.php?source=register">Register</a></div>  

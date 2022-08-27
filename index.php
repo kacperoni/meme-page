@@ -54,6 +54,7 @@
                                 $postCategoryId = $row["post_category_id"];
                                 $postAuthorId = $row["post_author_id"];
                                 $postId = $row["post_id"];
+                                $postContent = $row["post_content"];
 
                                 $query = "SELECT cat_title FROM categories WHERE cat_id = $postCategoryId";
                                 $categoryNameQuery = mysqli_query($connection,$query) or die("SQL Error :: ".mysqli_error($connection));
@@ -97,6 +98,9 @@
                                 <?php echo "<a class='text-danger text-decoration-none'>$postAuthor</a>" ?>
                                 <?php echo "<a class='text-secondary text-decoration-none'>$postDate</a>";?>
                                 <?php echo "<a href='index.php?category=$postCategoryId'class='text-danger text-decoration-none'>$catTitle</a>" ?></p>
+                            <?php if(!empty($postContent)): ?>
+                                <p class="px-3 py-1 mt-2 mb-0 tile-color"><?php echo $postContent; ?></p>
+                            <?php endif; ?>
                             <img src="images/<?php echo $postImage; ?>" width="100%" alt="meme" class="tile-color">
                             <div class="row mt-2">
                                 <div class="col-6">
@@ -130,6 +134,9 @@
                                             break;
                                         case "forgotPass":
                                             include "includes/forgot_password.php";
+                                            break;
+                                        case "resetPass";
+                                            include "includes/reset.php";
                                             break;
                                     }
                                 }else{

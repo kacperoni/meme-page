@@ -93,7 +93,7 @@
                                 <div class="container p-0 mt-2 tile-color">
                                 <div class="d-flex flex-row comment-row py-3 px-2">
                                     <div class="p-2">
-                                        <img src="profile.png" alt="user_profile" width="40">
+                                        <img src="images/avatars/<?php echo $_SESSION['user_profile_pic'];?>" alt="user_profile" width="40">
                                     </div>
                                     <div class="w-100">
                                         <h6 class="text-danger"><?php echo $commentAuthor;?>  <small class="text-secondary"><?php echo $commentDate; ?></small></h6>
@@ -130,7 +130,7 @@
                                 <div class="row tile-color m-0 p-0 mt-5">
                                     <div class="col">
                                         <div>
-                                            <img class="mx-0"src="profile.png" width="50" alt="profile-pic">
+                                            <img class="mx-0"src="images/avatars/<?php echo $_SESSION['user_profile_pic'];?>" width="50" alt="profile-pic">
                                             <span class="overlay-text fs-4">
                                                 <a href="post.php?post_id=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
                                             </span>
