@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(25,25,25);
+}
+
+.tile-color{
+    background-color: rgb(15,15,15);
+}
+
+.navbar{
+    width:250px;
+    height: 100vh;
+    position:fixed;
+}
+.nav-link{
+    /* padding: 1em; */
+    font-size: 1rem;
+}
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover{
+    border-bottom: 2px solid red;
+}
+a{
+    text-decoration: none;
+}
+.logout-link:hover{
+    border-bottom: 2px solid red;
+}
+.my-container{
+    margin-left: 250px;
+}
+
+.list-group-item.bg-dark.text-secondary.d-flex.justify-content-between.align-items-center:hover{
+    border-bottom: 2px solid red;
+}

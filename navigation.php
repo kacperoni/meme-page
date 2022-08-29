@@ -50,6 +50,7 @@
                 <li class="nav-item <?php echo $randomClass; ?>">
                     <a href="random.php?post_id=<?php echo $randomPostId; ?>" class="nav-link">Random</a>
                 </li>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                 <li class="nav-item dropdown <?php echo $categoryClass; ?>">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
@@ -68,6 +69,7 @@
                         ?>
                     </ul>
                 </li>
+                </div>
             </ul>
         </div>
     </div>
