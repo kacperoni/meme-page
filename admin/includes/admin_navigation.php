@@ -11,10 +11,7 @@
             <a href="../admin/categories.php" class="bi bi-card-list nav-link text-secondary"> Categories</a>
         </li>
         <li class="nav-item w-100 p-2">
-            <a href="" class="bi bi-people nav-link text-secondary"> Users</a>
-        </li>
-        <li class="nav-item w-100 p-2">
-            <a href="" class="nav-link text-secondary">Users</a>
+            <a href="../admin/users.php" class="bi bi-people nav-link text-secondary"> Users</a>
         </li>
     </ul>
 </nav>
