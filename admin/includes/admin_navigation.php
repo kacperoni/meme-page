@@ -5,7 +5,7 @@
             <a href="../admin/" class="bi bi-bar-chart-line nav-link text-secondary"> Dashboard</a>
         </li>
         <li class="nav-item w-100 p-2">
-            <a href="" class="bi bi-file-earmark-post nav-link text-secondary"> Posts</a>
+            <a href="../admin/all_posts.php" class="bi bi-file-earmark-post nav-link text-secondary"> Posts</a>
         </li>
         <li class="nav-item w-100 p-2">
             <a href="../admin/categories.php" class="bi bi-card-list nav-link text-secondary"> Categories</a>

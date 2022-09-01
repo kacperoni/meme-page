@@ -29,21 +29,25 @@
                     $userRole = $row["user_role"];
                     $userEmail = $row["user_email"];
                     $userProfilePic = $row["user_image"];
+                    $userBanned = $row["user_banned"];
                 }
-                
-                session_start();
-                $_SESSION["username"]=$username;
-                $_SESSION["user_id"]= $userId;
-                $_SESSION["user_role"] = $userRole;
-                $_SESSION["user_email"] = $userEmail;
-                if(empty($userProfilePic) or $userProfilePic === NULL){
-                    $_SESSION["user_profile_pic"] = "profile.png";
+                if($userBanned == "Banned"){
+                    echo "Your account has been banned!"; 
                 }else{
-                    $_SESSION["user_profile_pic"] = $userProfilePic;
-                }
-                
+                    session_start();
+                    $_SESSION["username"]=$username;
+                    $_SESSION["user_id"]= $userId;
+                    $_SESSION["user_role"] = $userRole;
+                    $_SESSION["user_email"] = $userEmail;
+                    if(empty($userProfilePic) or $userProfilePic === NULL){
+                        $_SESSION["user_profile_pic"] = "profile.png";
+                    }else{
+                        $_SESSION["user_profile_pic"] = $userProfilePic;
+                    }
+                    
 
-                header("Location: index.php");
+                    header("Location: index.php");
+                }
             }else{
                 echo "Invalid username or password, try again!";
             }
